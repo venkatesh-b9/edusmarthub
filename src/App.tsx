@@ -6,6 +6,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { RoleProvider } from "@/contexts/RoleContext";
 import Index from "./pages/Index";
 import SuperAdminDashboard from "./pages/SuperAdminDashboard";
+import Schools from "./pages/super-admin/Schools";
+import Analytics from "./pages/super-admin/Analytics";
+import SystemHealth from "./pages/super-admin/SystemHealth";
+import AuditLogs from "./pages/super-admin/AuditLogs";
+import Settings from "./pages/super-admin/Settings";
 import SchoolAdminDashboard from "./pages/SchoolAdminDashboard";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import ParentDashboard from "./pages/ParentDashboard";
@@ -25,7 +30,11 @@ const App = () => (
             
             {/* Super Admin Routes */}
             <Route path="/super-admin" element={<SuperAdminDashboard />} />
-            <Route path="/super-admin/*" element={<SuperAdminDashboard />} />
+            <Route path="/super-admin/schools" element={<Schools />} />
+            <Route path="/super-admin/analytics" element={<Analytics />} />
+            <Route path="/super-admin/system-health" element={<SystemHealth />} />
+            <Route path="/super-admin/audit-logs" element={<AuditLogs />} />
+            <Route path="/super-admin/settings" element={<Settings />} />
             
             {/* School Admin Routes */}
             <Route path="/school-admin" element={<SchoolAdminDashboard />} />
