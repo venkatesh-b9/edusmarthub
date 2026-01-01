@@ -4,6 +4,8 @@ import { StatsCard } from '@/components/dashboard/StatsCard';
 import { EnrollmentTrendChart, PerformanceDistributionChart, SchoolsByRegionChart } from '@/components/dashboard/Charts';
 import { RecentActivity } from '@/components/dashboard/RecentActivity';
 import { SchoolsList } from '@/components/dashboard/SchoolsList';
+import { AddSchoolModal } from '@/components/dashboard/AddSchoolModal';
+import { AnalyticsChat } from '@/components/dashboard/AnalyticsChat';
 import { Button } from '@/components/ui/button';
 import {
   Building2,
@@ -11,7 +13,6 @@ import {
   GraduationCap,
   TrendingUp,
   Download,
-  Plus,
   RefreshCw,
   Filter,
 } from 'lucide-react';
@@ -51,10 +52,7 @@ export default function SuperAdminDashboard() {
               <Download className="w-4 h-4" />
               Export
             </Button>
-            <Button size="sm" className="gap-2 gradient-primary text-white shadow-glow">
-              <Plus className="w-4 h-4" />
-              Add School
-            </Button>
+            <AddSchoolModal />
           </motion.div>
         </div>
 
@@ -151,6 +149,9 @@ export default function SuperAdminDashboard() {
           </div>
         </motion.div>
       </div>
+
+      {/* Analytics Chat Assistant */}
+      <AnalyticsChat />
     </DashboardLayout>
   );
 }
