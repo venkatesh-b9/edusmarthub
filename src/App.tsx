@@ -12,6 +12,12 @@ import SystemHealth from "./pages/super-admin/SystemHealth";
 import AuditLogs from "./pages/super-admin/AuditLogs";
 import Settings from "./pages/super-admin/Settings";
 import SchoolAdminDashboard from "./pages/SchoolAdminDashboard";
+import SchoolAdminTeachers from "./pages/school-admin/Teachers";
+import SchoolAdminStudents from "./pages/school-admin/Students";
+import SchoolAdminClasses from "./pages/school-admin/Classes";
+import SchoolAdminFinances from "./pages/school-admin/Finances";
+import SchoolAdminReports from "./pages/school-admin/Reports";
+import SchoolAdminSettings from "./pages/school-admin/Settings";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import ParentDashboard from "./pages/ParentDashboard";
 import NotFound from "./pages/NotFound";
@@ -38,7 +44,12 @@ const App = () => (
             
             {/* School Admin Routes */}
             <Route path="/school-admin" element={<SchoolAdminDashboard />} />
-            <Route path="/school-admin/*" element={<SchoolAdminDashboard />} />
+            <Route path="/school-admin/teachers" element={<SchoolAdminTeachers />} />
+            <Route path="/school-admin/students" element={<SchoolAdminStudents />} />
+            <Route path="/school-admin/classes" element={<SchoolAdminClasses />} />
+            <Route path="/school-admin/finances" element={<SchoolAdminFinances />} />
+            <Route path="/school-admin/reports" element={<SchoolAdminReports />} />
+            <Route path="/school-admin/settings" element={<SchoolAdminSettings />} />
             
             {/* Teacher Routes */}
             <Route path="/teacher" element={<TeacherDashboard />} />
