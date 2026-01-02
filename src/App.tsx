@@ -19,6 +19,12 @@ import SchoolAdminFinances from "./pages/school-admin/Finances";
 import SchoolAdminReports from "./pages/school-admin/Reports";
 import SchoolAdminSettings from "./pages/school-admin/Settings";
 import TeacherDashboard from "./pages/TeacherDashboard";
+import TeacherClasses from "./pages/teacher/Classes";
+import TeacherAttendance from "./pages/teacher/Attendance";
+import TeacherAssignments from "./pages/teacher/Assignments";
+import TeacherGrades from "./pages/teacher/Grades";
+import TeacherSchedule from "./pages/teacher/Schedule";
+import TeacherMessages from "./pages/teacher/Messages";
 import ParentDashboard from "./pages/ParentDashboard";
 import NotFound from "./pages/NotFound";
 
@@ -53,7 +59,12 @@ const App = () => (
             
             {/* Teacher Routes */}
             <Route path="/teacher" element={<TeacherDashboard />} />
-            <Route path="/teacher/*" element={<TeacherDashboard />} />
+            <Route path="/teacher/classes" element={<TeacherClasses />} />
+            <Route path="/teacher/attendance" element={<TeacherAttendance />} />
+            <Route path="/teacher/assignments" element={<TeacherAssignments />} />
+            <Route path="/teacher/grades" element={<TeacherGrades />} />
+            <Route path="/teacher/schedule" element={<TeacherSchedule />} />
+            <Route path="/teacher/messages" element={<TeacherMessages />} />
             
             {/* Parent Routes */}
             <Route path="/parent" element={<ParentDashboard />} />
