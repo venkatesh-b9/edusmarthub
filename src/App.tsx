@@ -26,6 +26,12 @@ import TeacherGrades from "./pages/teacher/Grades";
 import TeacherSchedule from "./pages/teacher/Schedule";
 import TeacherMessages from "./pages/teacher/Messages";
 import ParentDashboard from "./pages/ParentDashboard";
+import ParentChildren from "./pages/parent/Children";
+import ParentAttendance from "./pages/parent/Attendance";
+import ParentGrades from "./pages/parent/Grades";
+import ParentMessages from "./pages/parent/Messages";
+import ParentDocuments from "./pages/parent/Documents";
+import ParentPayments from "./pages/parent/Payments";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -68,7 +74,12 @@ const App = () => (
             
             {/* Parent Routes */}
             <Route path="/parent" element={<ParentDashboard />} />
-            <Route path="/parent/*" element={<ParentDashboard />} />
+            <Route path="/parent/children" element={<ParentChildren />} />
+            <Route path="/parent/attendance" element={<ParentAttendance />} />
+            <Route path="/parent/grades" element={<ParentGrades />} />
+            <Route path="/parent/messages" element={<ParentMessages />} />
+            <Route path="/parent/documents" element={<ParentDocuments />} />
+            <Route path="/parent/payments" element={<ParentPayments />} />
             
             {/* Catch-all */}
             <Route path="*" element={<NotFound />} />
