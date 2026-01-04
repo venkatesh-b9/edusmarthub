@@ -65,6 +65,7 @@ export default function SuperAdminDashboard() {
             icon={Building2}
             variant="primary"
             delay={0}
+            href="/super-admin/schools"
           />
           <StatsCard
             title="Total Students"
@@ -73,6 +74,7 @@ export default function SuperAdminDashboard() {
             icon={GraduationCap}
             variant="success"
             delay={0.1}
+            href="/super-admin/students"
           />
           <StatsCard
             title="Total Teachers"
@@ -81,6 +83,7 @@ export default function SuperAdminDashboard() {
             icon={Users}
             variant="accent"
             delay={0.2}
+            href="/super-admin/teachers"
           />
           <StatsCard
             title="Avg Performance"
@@ -89,6 +92,7 @@ export default function SuperAdminDashboard() {
             icon={TrendingUp}
             variant="warning"
             delay={0.3}
+            href="/super-admin/analytics"
           />
         </div>
 

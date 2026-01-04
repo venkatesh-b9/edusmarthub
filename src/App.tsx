@@ -7,6 +7,8 @@ import { RoleProvider } from "@/contexts/RoleContext";
 import Index from "./pages/Index";
 import SuperAdminDashboard from "./pages/SuperAdminDashboard";
 import Schools from "./pages/super-admin/Schools";
+import Students from "./pages/super-admin/Students";
+import Teachers from "./pages/super-admin/Teachers";
 import Analytics from "./pages/super-admin/Analytics";
 import SystemHealth from "./pages/super-admin/SystemHealth";
 import AuditLogs from "./pages/super-admin/AuditLogs";
@@ -49,6 +51,8 @@ const App = () => (
             {/* Super Admin Routes */}
             <Route path="/super-admin" element={<SuperAdminDashboard />} />
             <Route path="/super-admin/schools" element={<Schools />} />
+            <Route path="/super-admin/students" element={<Students />} />
+            <Route path="/super-admin/teachers" element={<Teachers />} />
             <Route path="/super-admin/analytics" element={<Analytics />} />
             <Route path="/super-admin/system-health" element={<SystemHealth />} />
             <Route path="/super-admin/audit-logs" element={<AuditLogs />} />
