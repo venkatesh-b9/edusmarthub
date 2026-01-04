@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { StatsCard } from '@/components/dashboard/StatsCard';
@@ -5,19 +6,35 @@ import { EnrollmentTrendChart, PerformanceDistributionChart, SchoolsByRegionChar
 import { RecentActivity } from '@/components/dashboard/RecentActivity';
 import { SchoolsList } from '@/components/dashboard/SchoolsList';
 import { AddSchoolModal } from '@/components/dashboard/AddSchoolModal';
+import { FilterPopover } from '@/components/dashboard/FilterPopover';
+import { ExportModal } from '@/components/dashboard/ExportModal';
 import { AnalyticsChat } from '@/components/dashboard/AnalyticsChat';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 import {
   Building2,
   Users,
   GraduationCap,
   TrendingUp,
-  Download,
   RefreshCw,
-  Filter,
+  Loader2,
 } from 'lucide-react';
 
 export default function SuperAdminDashboard() {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    toast.info('Refreshing data...');
+    
+    setTimeout(() => {
+      setIsRefreshing(false);
+      toast.success('Dashboard refreshed', {
+        description: 'All data is up to date',
+      });
+    }, 1500);
+  };
+
   return (
     <DashboardLayout>
       <div className="space-y-6">
@@ -40,18 +57,22 @@ export default function SuperAdminDashboard() {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3"
           >
-            <Button variant="outline" size="sm" className="gap-2">
-              <RefreshCw className="w-4 h-4" />
-              Refresh
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="gap-2"
+              onClick={handleRefresh}
+              disabled={isRefreshing}
+            >
+              {isRefreshing ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <RefreshCw className="w-4 h-4" />
+              )}
+              {isRefreshing ? 'Refreshing...' : 'Refresh'}
             </Button>
-            <Button variant="outline" size="sm" className="gap-2">
-              <Filter className="w-4 h-4" />
-              Filters
-            </Button>
-            <Button variant="outline" size="sm" className="gap-2">
-              <Download className="w-4 h-4" />
-              Export
-            </Button>
+            <FilterPopover />
+            <ExportModal />
             <AddSchoolModal />
           </motion.div>
         </div>
