@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { LucideIcon, TrendingUp, TrendingDown } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface StatsCardProps {
   title: string;
@@ -12,6 +13,7 @@ interface StatsCardProps {
   icon: LucideIcon;
   variant?: 'default' | 'primary' | 'success' | 'warning' | 'accent';
   delay?: number;
+  href?: string;
 }
 
 const variantStyles = {
@@ -49,18 +51,28 @@ export function StatsCard({
   icon: Icon,
   variant = 'default',
   delay = 0,
+  href,
 }: StatsCardProps) {
+  const navigate = useNavigate();
   const styles = variantStyles[variant];
   const isPositive = change && change.value >= 0;
+
+  const handleClick = () => {
+    if (href) {
+      navigate(href);
+    }
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
+      onClick={handleClick}
       className={cn(
         "relative rounded-xl border border-border p-6 shadow-card hover:shadow-card-hover transition-all duration-300",
-        styles.bg
+        styles.bg,
+        href && "cursor-pointer hover:scale-[1.02]"
       )}
     >
       <div className="flex items-start justify-between">
