@@ -40,6 +40,8 @@ const roleNavItems: Record<UserRole, NavItem[]> = {
   'super-admin': [
     { label: 'Dashboard', icon: <LayoutDashboard size={20} />, href: '/super-admin' },
     { label: 'Schools', icon: <Building2 size={20} />, href: '/super-admin/schools' },
+    { label: 'Students', icon: <GraduationCap size={20} />, href: '/super-admin/students' },
+    { label: 'Teachers', icon: <Users size={20} />, href: '/super-admin/teachers' },
     { label: 'Analytics', icon: <BarChart3 size={20} />, href: '/super-admin/analytics' },
     { label: 'System Health', icon: <Shield size={20} />, href: '/super-admin/system-health' },
     { label: 'Audit Logs', icon: <ClipboardList size={20} />, href: '/super-admin/audit-logs' },
