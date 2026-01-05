@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRole } from '@/contexts/RoleContext';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -15,6 +16,12 @@ import {
   LogOut,
   User,
   HelpCircle,
+  GraduationCap,
+  Users,
+  BookOpen,
+  School,
+  BarChart3,
+  FileText,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -25,6 +32,14 @@ interface Notification {
   time: string;
   read: boolean;
   type: 'info' | 'warning' | 'success';
+}
+
+interface SearchResult {
+  id: string;
+  title: string;
+  category: string;
+  path: string;
+  icon: React.ElementType;
 }
 
 const mockNotifications: Notification[] = [
@@ -54,18 +69,60 @@ const mockNotifications: Notification[] = [
   },
 ];
 
+const allSearchItems: SearchResult[] = [
+  { id: '1', title: 'Students', category: 'Pages', path: '/school-admin/students', icon: GraduationCap },
+  { id: '2', title: 'Teachers', category: 'Pages', path: '/school-admin/teachers', icon: Users },
+  { id: '3', title: 'Classes', category: 'Pages', path: '/school-admin/classes', icon: BookOpen },
+  { id: '4', title: 'Reports', category: 'Pages', path: '/school-admin/reports', icon: FileText },
+  { id: '5', title: 'Finances', category: 'Pages', path: '/school-admin/finances', icon: BarChart3 },
+  { id: '6', title: 'Settings', category: 'Pages', path: '/school-admin/settings', icon: Settings },
+  { id: '7', title: 'Dashboard', category: 'Pages', path: '/school-admin', icon: School },
+  { id: '8', title: 'Super Admin Dashboard', category: 'Pages', path: '/super-admin', icon: School },
+  { id: '9', title: 'Schools Management', category: 'Pages', path: '/super-admin/schools', icon: School },
+  { id: '10', title: 'Analytics', category: 'Pages', path: '/super-admin/analytics', icon: BarChart3 },
+];
+
 export function Header() {
   const { userInfo } = useRole();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const unreadCount = mockNotifications.filter((n) => !n.read).length;
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
     document.documentElement.classList.toggle('dark');
+  };
+
+  const filteredSearchResults = searchQuery.length > 0
+    ? allSearchItems.filter(item => 
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
+  const handleSearchSelect = (path: string) => {
+    navigate(path);
+    setSearchQuery('');
+    setIsSearchFocused(false);
+    searchInputRef.current?.blur();
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && filteredSearchResults.length > 0) {
+      handleSearchSelect(filteredSearchResults[0].path);
+    }
+    if (e.key === 'Escape') {
+      setSearchQuery('');
+      setIsSearchFocused(false);
+      searchInputRef.current?.blur();
+    }
   };
 
   return (
@@ -75,15 +132,47 @@ export function Header() {
         <div className="relative w-96">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
+            ref={searchInputRef}
             type="text"
             placeholder="Search anything..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setIsSearchFocused(true)}
+            onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
+            onKeyDown={handleSearchKeyDown}
             className="pl-10 bg-muted/50 border-0 focus-visible:ring-1 focus-visible:ring-primary"
           />
           <kbd className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
             ⌘K
           </kbd>
+
+          {/* Search Results Dropdown */}
+          <AnimatePresence>
+            {isSearchFocused && filteredSearchResults.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="absolute top-full left-0 right-0 mt-2 bg-card rounded-xl shadow-lg border border-border z-50 overflow-hidden"
+              >
+                <div className="py-2 max-h-80 overflow-y-auto">
+                  {filteredSearchResults.map((result) => (
+                    <button
+                      key={result.id}
+                      onClick={() => handleSearchSelect(result.path)}
+                      className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-muted transition-colors text-left"
+                    >
+                      <result.icon className="w-4 h-4 text-muted-foreground" />
+                      <div>
+                        <p className="text-sm font-medium">{result.title}</p>
+                        <p className="text-xs text-muted-foreground">{result.category}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Right Section */}
