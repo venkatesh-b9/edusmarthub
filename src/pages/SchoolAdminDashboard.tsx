@@ -100,6 +100,7 @@ export default function SchoolAdminDashboard() {
             icon={GraduationCap}
             variant="primary"
             delay={0}
+            href="/school-admin/students"
           />
           <StatsCard
             title="Total Teachers"
@@ -108,6 +109,7 @@ export default function SchoolAdminDashboard() {
             icon={Users}
             variant="success"
             delay={0.1}
+            href="/school-admin/teachers"
           />
           <StatsCard
             title="Active Classes"
@@ -115,6 +117,7 @@ export default function SchoolAdminDashboard() {
             icon={BookOpen}
             variant="accent"
             delay={0.2}
+            href="/school-admin/classes"
           />
           <StatsCard
             title="Attendance Rate"
@@ -123,6 +126,7 @@ export default function SchoolAdminDashboard() {
             icon={Calendar}
             variant="warning"
             delay={0.3}
+            href="/school-admin/reports"
           />
         </div>
 
