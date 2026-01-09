@@ -4,6 +4,9 @@ import { JwtPayload, Permission, UserRole } from '../types';
 import { UnauthorizedError, ForbiddenError } from '../utils/errors';
 import logger from '../utils/logger';
 
+// Re-export for convenience
+export { Permission, UserRole };
+
 declare global {
   namespace Express {
     interface Request {

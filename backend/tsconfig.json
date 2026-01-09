@@ -25,6 +25,7 @@
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": false,
     "noEmitOnError": false,
+    "exactOptionalPropertyTypes": false,
     "baseUrl": "./src",
     "paths": {
       "@shared/*": ["shared/*"],
