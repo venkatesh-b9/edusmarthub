@@ -138,8 +138,8 @@ export class BusTrackingService {
 
   private isValidLocation(data: BusLocation): boolean {
     return (
-      data.busId &&
-      data.routeId &&
+      Boolean(data.busId) &&
+      Boolean(data.routeId) &&
       typeof data.latitude === 'number' &&
       typeof data.longitude === 'number' &&
       data.latitude >= -90 &&

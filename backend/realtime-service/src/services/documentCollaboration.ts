@@ -2,7 +2,6 @@ import { Server as SocketIOServer, Socket } from 'socket.io';
 import { Message, MessageType } from '../types';
 import logger from '../utils/logger';
 import { MessagePersistence } from '../utils/messagePersistence';
-import ShareDB from 'sharedb/lib/client';
 import { v4 as uuidv4 } from 'uuid';
 
 export class DocumentCollaborationService {
@@ -93,7 +92,7 @@ export class DocumentCollaborationService {
   }
 
   private handleDocumentOperation(socket: Socket, data: { documentId: string; operation: any }) {
-    const roomId = `document:${documentId}`;
+    const roomId = `document:${data.documentId}`;
     const docState = this.documentStates.get(data.documentId);
 
     if (!docState) {

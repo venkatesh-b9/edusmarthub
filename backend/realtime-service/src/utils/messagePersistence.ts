@@ -26,7 +26,6 @@ const MessageModel = sequelize.define(
     roomId: {
       type: DataTypes.STRING,
       allowNull: false,
-      index: true,
     },
     senderId: {
       type: DataTypes.STRING,
