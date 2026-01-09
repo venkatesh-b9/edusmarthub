@@ -500,6 +500,7 @@ export class TimetableService {
     roomId?: string;
     roomNumber?: string;
     building?: string;
+    isActive?: boolean;
   }): Promise<TimetablePeriod> {
     // Check for conflicts before creating
     const conflicts = await this.detectPeriodConflicts({
@@ -526,7 +527,7 @@ export class TimetableService {
       )
       VALUES (
         gen_random_uuid(), :timetableId, :dayOfWeek, :periodNumber, :startTime, :endTime,
-        :subjectId, :teacherId, :roomId, :roomNumber, :building, true
+        :subjectId, :teacherId, :roomId, :roomNumber, :building, :isActive
       )
       RETURNING *`,
       {
@@ -541,6 +542,7 @@ export class TimetableService {
           roomId: data.roomId || null,
           roomNumber: data.roomNumber || null,
           building: data.building || null,
+          isActive: data.isActive !== undefined ? data.isActive : true,
         },
         type: QueryTypes.SELECT,
       }
@@ -1177,7 +1179,7 @@ export class TimetableService {
 
   // ==================== Bulk Operations ====================
   
-  async bulkCreatePeriods(periods: Array<Omit<TimetablePeriod, 'id'>>): Promise<TimetablePeriod[]> {
+  async bulkCreatePeriods(periods: Array<Omit<TimetablePeriod, 'id' | 'isActive'>>): Promise<TimetablePeriod[]> {
     const created: TimetablePeriod[] = [];
 
     for (const period of periods) {
@@ -1223,6 +1225,7 @@ export class TimetableService {
       roomId: p.roomId,
       roomNumber: p.roomNumber,
       building: p.building,
+      isActive: true,
     }));
 
     await this.bulkCreatePeriods(periodsToCreate);
