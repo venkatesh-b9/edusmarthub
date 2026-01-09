@@ -31,8 +31,8 @@ sentence-transformers==2.2.2
 # Computer Vision
 opencv-python==4.8.1.78
 Pillow==10.1.0
-face-recognition==1.3.0
-dlib==19.24.2
+# face-recognition==1.3.0  # Optional - requires dlib which can be problematic
+# dlib==19.24.2  # Optional - comment out if build fails
 
 # Audio Processing
 SpeechRecognition==3.10.0
