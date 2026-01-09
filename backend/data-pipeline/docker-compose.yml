@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: edusmarthub-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - data-pipeline-network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: edusmarthub-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
+    networks:
+      - data-pipeline-network
+
+  data-pipeline:
+    build: .
+    container_name: edusmarthub-data-pipeline
+    ports:
+      - "3003:3003"
+      - "9091:9091"
+    environment:
+      - NODE_ENV=production
+      - KAFKA_BROKERS=kafka:9092
+      - POSTGRES_HOST=postgres
+      - MONGODB_URI=mongodb://mongodb:27017/edusmarthub
+      - REDIS_HOST=redis
+    depends_on:
+      - kafka
+      - postgres
+      - mongodb
+      - redis
+    volumes:
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+      - ./backups:/app/backups
+    networks:
+      - data-pipeline-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: edusmarthub-pipeline-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: edusmarthub
+    ports:
+      - "5434:5432"
+    volumes:
+      - pipeline_postgres_data:/var/lib/postgresql/data
+    networks:
+      - data-pipeline-network
+
+  mongodb:
+    image: mongo:7
+    container_name: edusmarthub-pipeline-mongodb
+    ports:
+      - "27018:27017"
+    volumes:
+      - pipeline_mongodb_data:/data/db
+    networks:
+      - data-pipeline-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: edusmarthub-pipeline-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - pipeline_redis_data:/data
+    networks:
+      - data-pipeline-network
+
+volumes:
+  pipeline_postgres_data:
+  pipeline_mongodb_data:
+  pipeline_redis_data:
+
+networks:
+  data-pipeline-network:
+    driver: bridge

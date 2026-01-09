@@ -1,0 +1,53 @@
+{
+  "common": {
+    "welcome": "Bienvenue",
+    "dashboard": "Tableau de bord",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "export": "Exporter",
+    "import": "Importer",
+    "refresh": "Actualiser"
+  },
+  "superAdmin": {
+    "title": "Tableau de bord Super Admin",
+    "schools": "Écoles",
+    "students": "Étudiants",
+    "teachers": "Enseignants",
+    "analytics": "Analyses",
+    "systemHealth": "Santé du système",
+    "auditLogs": "Journaux d'audit"
+  },
+  "schoolAdmin": {
+    "title": "Tableau de bord Administrateur d'école",
+    "teacherManagement": "Gestion des enseignants",
+    "studentManagement": "Gestion des étudiants",
+    "classes": "Classes",
+    "finances": "Finances",
+    "reports": "Rapports"
+  },
+  "teacher": {
+    "title": "Portail enseignant",
+    "classes": "Classes",
+    "attendance": "Présence",
+    "assignments": "Devoirs",
+    "grades": "Notes",
+    "schedule": "Horaire",
+    "messages": "Messages"
+  },
+  "parent": {
+    "title": "Tableau de bord Parent",
+    "children": "Enfants",
+    "attendance": "Présence",
+    "grades": "Notes",
+    "messages": "Messages",
+    "documents": "Documents",
+    "payments": "Paiements"
+  }
+}

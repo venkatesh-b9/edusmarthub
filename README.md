@@ -1,73 +1,126 @@
-# Welcome to your Lovable project
+# EduSmartHub - Complete School Management System
 
-## Project info
+Enterprise-grade School Management System with React, TypeScript, Node.js, and AI-powered features.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🚀 Features
 
-## How can I edit this code?
+- **Complete Integration Layer** - Master orchestration connecting all components
+- **AI-Powered Services** - Timetable optimization, performance prediction, attendance analysis
+- **Real-Time Updates** - WebSocket-based real-time notifications and data sync
+- **Workflow Automation** - Complete workflow integration across all components
+- **Production Monitoring** - Comprehensive monitoring with AI-powered insights
+- **Multi-Role Support** - Super Admin, School Admin, Teacher, Parent roles
+- **Complete Data Flow** - Seamless data synchronization with conflict resolution
 
-There are several ways of editing your application.
+## 📦 Project Structure
 
-**Use Lovable**
+```
+EduSmartHub/
+├── frontend/              # React + TypeScript frontend
+│   ├── src/
+│   │   ├── core/         # Core orchestration components
+│   │   ├── integrations/ # Integration layer
+│   │   ├── components/   # React components
+│   │   ├── pages/        # Page components
+│   │   └── lib/          # Utilities and services
+│   ├── Dockerfile        # Frontend Docker configuration
+│   └── nginx.conf        # Nginx configuration
+├── backend/              # Node.js + TypeScript backend
+│   ├── src/              # Backend source code
+│   ├── ai-service/       # Python AI services
+│   ├── Dockerfile        # Backend Docker configuration
+│   └── docker-compose.yml
+├── docker-compose.production.yml  # Production deployment
+└── README.md
+```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🛠️ Quick Start
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js 20+
+- Docker and Docker Compose
+- Git
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Development
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Frontend
+cd frontend
+npm install
+npm run dev
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Backend
+cd backend
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Production Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# Build and start all services
+docker-compose -f docker-compose.production.yml up -d
 
-**Use GitHub Codespaces**
+# Or build individually
+docker build -t edusmarthub-frontend -f frontend/Dockerfile frontend/
+docker build -t edusmarthub-backend -f backend/Dockerfile backend/
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔗 Integration Components
 
-## What technologies are used for this project?
+### Core Orchestration
+- **MasterOrchestrator** - Master service orchestrator
+- **IntegrationManager** - Service initialization and health monitoring
+- **DataSyncManager** - Real-time data synchronization
+- **GlobalEventSystem** - Unified event bus
+- **WorkflowEngine** - Workflow execution engine
 
-This project is built with:
+### Integration Layer
+- **DataFlowOrchestrator** - Seamless data flow
+- **RealTimeEventBus** - Real-time event routing
+- **WorkflowIntegrator** - Complete workflow integration
+- **ProductionMonitorService** - Comprehensive monitoring
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 📚 Documentation
 
-## How can I deploy this project?
+- [Complete Integration Orchestration](./COMPLETE_INTEGRATION_ORCHESTRATION.md)
+- [Production Deployment Guide](./PRODUCTION_DEPLOYMENT.md)
+- [Database Architecture](./DATABASE_ARCHITECTURE.md)
+- [Role Connections and Routes](./ROLE_CONNECTIONS_AND_ROUTES.md)
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## 🌐 Environment Variables
 
-## Can I connect a custom domain to my Lovable project?
+### Frontend
+```env
+VITE_API_URL=http://localhost:3000/api/v1
+VITE_SOCKET_URL=http://localhost:3001
+VITE_AI_SERVICE_URL=http://localhost:5000/api/v1/ai
+```
 
-Yes, you can!
+### Backend
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/edusmarthub
+REDIS_URL=redis://localhost:6379
+AI_SERVICE_URL=http://localhost:5000
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🧪 Testing
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```bash
+# Run verification script
+chmod +x verify-build.sh
+./verify-build.sh
+```
+
+## 📝 License
+
+MIT
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our contributing guidelines first.
+
+## 📧 Support
+
+For issues and questions, please open an issue on GitHub.

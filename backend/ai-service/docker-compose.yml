@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  ai-service:
+    build: .
+    container_name: edusmarthub-ai-service
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - POSTGRES_HOST=postgres
+      - MONGODB_URI=mongodb://mongodb:27017/edusmarthub
+      - REDIS_HOST=redis
+      - BACKEND_API_URL=http://api-gateway:3000
+    volumes:
+      - ./models:/app/models
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    depends_on:
+      - postgres
+      - mongodb
+      - redis
+    networks:
+      - edusmarthub-network
+
+  mlflow:
+    image: python:3.11-slim
+    container_name: edusmarthub-mlflow
+    ports:
+      - "5001:5000"
+    command: >
+      sh -c "pip install mlflow && 
+             mlflow server --host 0.0.0.0 --port 5000 --default-artifact-root /mlflow/artifacts"
+    volumes:
+      - mlflow_data:/mlflow
+    networks:
+      - edusmarthub-network
+
+volumes:
+  mlflow_data:
+
+networks:
+  edusmarthub-network:
+    external: true

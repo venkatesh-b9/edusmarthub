@@ -1,0 +1,53 @@
+{
+  "common": {
+    "welcome": "مرحباً",
+    "dashboard": "لوحة التحكم",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "add": "إضافة",
+    "search": "بحث",
+    "filter": "تصفية",
+    "export": "تصدير",
+    "import": "استيراد",
+    "refresh": "تحديث"
+  },
+  "superAdmin": {
+    "title": "لوحة تحكم المشرف الرئيسي",
+    "schools": "المدارس",
+    "students": "الطلاب",
+    "teachers": "المعلمون",
+    "analytics": "التحليلات",
+    "systemHealth": "صحة النظام",
+    "auditLogs": "سجلات التدقيق"
+  },
+  "schoolAdmin": {
+    "title": "لوحة تحكم مدير المدرسة",
+    "teacherManagement": "إدارة المعلمين",
+    "studentManagement": "إدارة الطلاب",
+    "classes": "الفصول",
+    "finances": "المالية",
+    "reports": "التقارير"
+  },
+  "teacher": {
+    "title": "بوابة المعلم",
+    "classes": "الفصول",
+    "attendance": "الحضور",
+    "assignments": "الواجبات",
+    "grades": "الدرجات",
+    "schedule": "الجدول",
+    "messages": "الرسائل"
+  },
+  "parent": {
+    "title": "لوحة تحكم الوالدين",
+    "children": "الأطفال",
+    "attendance": "الحضور",
+    "grades": "الدرجات",
+    "messages": "الرسائل",
+    "documents": "المستندات",
+    "payments": "المدفوعات"
+  }
+}

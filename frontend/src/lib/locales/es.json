@@ -1,0 +1,53 @@
+{
+  "common": {
+    "welcome": "Bienvenido",
+    "dashboard": "Panel de control",
+    "settings": "Configuración",
+    "logout": "Cerrar sesión",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Agregar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "export": "Exportar",
+    "import": "Importar",
+    "refresh": "Actualizar"
+  },
+  "superAdmin": {
+    "title": "Panel de Super Administrador",
+    "schools": "Escuelas",
+    "students": "Estudiantes",
+    "teachers": "Maestros",
+    "analytics": "Análisis",
+    "systemHealth": "Salud del Sistema",
+    "auditLogs": "Registros de Auditoría"
+  },
+  "schoolAdmin": {
+    "title": "Panel de Administrador de Escuela",
+    "teacherManagement": "Gestión de Maestros",
+    "studentManagement": "Gestión de Estudiantes",
+    "classes": "Clases",
+    "finances": "Finanzas",
+    "reports": "Informes"
+  },
+  "teacher": {
+    "title": "Portal de Maestros",
+    "classes": "Clases",
+    "attendance": "Asistencia",
+    "assignments": "Tareas",
+    "grades": "Calificaciones",
+    "schedule": "Horario",
+    "messages": "Mensajes"
+  },
+  "parent": {
+    "title": "Panel de Padres",
+    "children": "Hijos",
+    "attendance": "Asistencia",
+    "grades": "Calificaciones",
+    "messages": "Mensajes",
+    "documents": "Documentos",
+    "payments": "Pagos"
+  }
+}

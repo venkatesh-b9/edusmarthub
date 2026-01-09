@@ -1,0 +1,53 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "logout": "Logout",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "refresh": "Refresh"
+  },
+  "superAdmin": {
+    "title": "Super Admin Dashboard",
+    "schools": "Schools",
+    "students": "Students",
+    "teachers": "Teachers",
+    "analytics": "Analytics",
+    "systemHealth": "System Health",
+    "auditLogs": "Audit Logs"
+  },
+  "schoolAdmin": {
+    "title": "School Admin Dashboard",
+    "teacherManagement": "Teacher Management",
+    "studentManagement": "Student Management",
+    "classes": "Classes",
+    "finances": "Finances",
+    "reports": "Reports"
+  },
+  "teacher": {
+    "title": "Teacher Portal",
+    "classes": "Classes",
+    "attendance": "Attendance",
+    "assignments": "Assignments",
+    "grades": "Grades",
+    "schedule": "Schedule",
+    "messages": "Messages"
+  },
+  "parent": {
+    "title": "Parent Dashboard",
+    "children": "Children",
+    "attendance": "Attendance",
+    "grades": "Grades",
+    "messages": "Messages",
+    "documents": "Documents",
+    "payments": "Payments"
+  }
+}
