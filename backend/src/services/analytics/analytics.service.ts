@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { connectMongoDB } from '../../config/mongodb';
 import logger from '../../shared/utils/logger';
 import sequelize from '../../config/database';
+import { QueryTypes } from 'sequelize';
 
 interface AnalyticsData {
   schoolId: string;
@@ -38,7 +39,7 @@ export class AnalyticsService {
       `SELECT COUNT(*) as total FROM users WHERE "schoolId" = :schoolId AND role = 'student' AND "isActive" = true`,
       {
         replacements: { schoolId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 
@@ -46,7 +47,7 @@ export class AnalyticsService {
       `SELECT COUNT(*) as total FROM users WHERE "schoolId" = :schoolId AND role = 'teacher' AND "isActive" = true`,
       {
         replacements: { schoolId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 
@@ -60,7 +61,7 @@ export class AnalyticsService {
        AND date <= :endDate`,
       {
         replacements: { schoolId, startDate, endDate },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 
@@ -74,7 +75,7 @@ export class AnalyticsService {
        AND g."createdAt" <= :endDate`,
       {
         replacements: { schoolId, startDate, endDate },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 
@@ -88,7 +89,7 @@ export class AnalyticsService {
        AND "paidAt" <= :endDate`,
       {
         replacements: { schoolId, startDate, endDate },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 
@@ -163,7 +164,7 @@ export class AnalyticsService {
        AND date <= :endDate`,
       {
         replacements: { schoolId, startDate, endDate },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 
@@ -193,7 +194,7 @@ export class AnalyticsService {
        AND g."createdAt" <= :endDate`,
       {
         replacements: { schoolId, startDate, endDate },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 
@@ -221,7 +222,7 @@ export class AnalyticsService {
        AND "createdAt" <= :endDate`,
       {
         replacements: { schoolId, startDate, endDate },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 

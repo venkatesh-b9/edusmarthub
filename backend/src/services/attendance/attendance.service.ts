@@ -2,6 +2,7 @@ import { Attendance, AttendanceStatus, AttendanceMethod } from '../../shared/typ
 import { NotFoundError } from '../../shared/utils/errors';
 import logger from '../../shared/utils/logger';
 import sequelize from '../../config/database';
+import { QueryTypes } from 'sequelize';
 import { publishMessage } from '../../config/rabbitmq';
 import redis from '../../config/redis';
 
@@ -31,7 +32,7 @@ export class AttendanceService {
           markedBy: data.markedBy,
           notes: data.notes || null,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Attendance[];
 
@@ -101,7 +102,7 @@ export class AttendanceService {
        ORDER BY date DESC`,
       {
         replacements: { studentId, startDate, endDate },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Attendance[];
 
@@ -119,7 +120,7 @@ export class AttendanceService {
        ORDER BY "studentId"`,
       {
         replacements: { classId, date },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Attendance[];
 
@@ -154,7 +155,7 @@ export class AttendanceService {
       `UPDATE attendance SET ${updateFields.join(', ')} WHERE id = :id RETURNING *`,
       {
         replacements,
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Attendance[];
 
@@ -173,7 +174,7 @@ export class AttendanceService {
       `SELECT * FROM attendance WHERE id = :id LIMIT 1`,
       {
         replacements: { id },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Attendance[];
 
@@ -205,7 +206,7 @@ export class AttendanceService {
        AND date <= :endDate`,
       {
         replacements: { studentId, startDate, endDate },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 

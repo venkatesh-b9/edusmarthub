@@ -2,6 +2,7 @@ import { Message, MessageType } from '../../shared/types';
 import { NotFoundError } from '../../shared/utils/errors';
 import logger from '../../shared/utils/logger';
 import sequelize from '../../config/database';
+import { QueryTypes } from 'sequelize';
 import { publishMessage } from '../../config/rabbitmq';
 import { Server as SocketIOServer } from 'socket.io';
 
@@ -35,7 +36,7 @@ export class CommunicationService {
           type: data.type,
           attachments: data.attachments ? JSON.stringify(data.attachments) : null,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Message[];
 
@@ -94,7 +95,7 @@ export class CommunicationService {
 
     const messages = await sequelize.query(query, {
       replacements,
-      type: sequelize.QueryTypes.SELECT,
+      type: QueryTypes.SELECT,
     }) as Message[];
 
     // Get total count
@@ -103,7 +104,7 @@ export class CommunicationService {
        WHERE "senderId" = :userId OR "recipientId" = :userId`,
       {
         replacements: { userId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 
@@ -129,7 +130,7 @@ export class CommunicationService {
        WHERE id = :id RETURNING *`,
       {
         replacements: { id: messageId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Message[];
 
@@ -171,7 +172,7 @@ export class CommunicationService {
       `SELECT * FROM messages WHERE id = :id LIMIT 1`,
       {
         replacements: { id },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Message[];
 

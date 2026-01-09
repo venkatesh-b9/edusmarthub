@@ -174,7 +174,7 @@ export class TimetableService {
           shiftName: data.shiftName || null,
           shiftNumber: data.shiftNumber || 1,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as SchoolTiming[];
 
@@ -193,7 +193,7 @@ export class TimetableService {
        LIMIT 1`,
       {
         replacements: { tenantId, academicYearId, shiftNumber },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as SchoolTiming[];
 
@@ -241,7 +241,7 @@ export class TimetableService {
           location: data.location || null,
           sequenceOrder: data.sequenceOrder || 0,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as BreakSchedule[];
 
@@ -256,7 +256,7 @@ export class TimetableService {
        ORDER BY sequence_order, start_time`,
       {
         replacements: { schoolTimingId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as BreakSchedule[];
 
@@ -308,7 +308,7 @@ export class TimetableService {
           hasScienceLab: data.hasScienceLab || false,
           specialEquipment: data.specialEquipment ? JSON.stringify(data.specialEquipment) : null,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Room[];
 
@@ -324,7 +324,7 @@ export class TimetableService {
        LIMIT 1`,
       {
         replacements: { tenantId, roomNumber, building: building || null },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Room[];
 
@@ -392,7 +392,7 @@ export class TimetableService {
           maxPeriodsPerWeek: data.maxPeriodsPerWeek || null,
           preferredTimeSlots: data.preferredTimeSlots ? JSON.stringify(data.preferredTimeSlots) : null,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as TeacherAvailability[];
 
@@ -408,7 +408,7 @@ export class TimetableService {
        ORDER BY day_of_week, start_time`,
       {
         replacements: { teacherId, academicYearId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as TeacherAvailability[];
 
@@ -446,7 +446,7 @@ export class TimetableService {
           schoolTimingId: data.schoolTimingId || null,
           templateId: data.templateId || null,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Timetable[];
 
@@ -459,7 +459,7 @@ export class TimetableService {
       `SELECT * FROM timetables WHERE id = :id`,
       {
         replacements: { id },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Timetable[];
 
@@ -542,7 +542,7 @@ export class TimetableService {
           roomNumber: data.roomNumber || null,
           building: data.building || null,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as TimetablePeriod[];
 
@@ -623,7 +623,7 @@ export class TimetableService {
        RETURNING *`,
       {
         replacements,
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as TimetablePeriod[];
 
@@ -655,7 +655,7 @@ export class TimetableService {
       `SELECT * FROM timetable_periods WHERE id = :id`,
       {
         replacements: { id },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as TimetablePeriod[];
 
@@ -670,7 +670,7 @@ export class TimetableService {
        ORDER BY day_of_week, period_number`,
       {
         replacements: { timetableId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as TimetablePeriod[];
 
@@ -711,7 +711,7 @@ export class TimetableService {
             endTime: data.endTime,
             excludePeriodId: data.excludePeriodId || null,
           },
-          type: sequelize.QueryTypes.SELECT,
+          type: QueryTypes.SELECT,
         }
       ) as TimetablePeriod[];
 
@@ -752,7 +752,7 @@ export class TimetableService {
             endTime: data.endTime,
             excludePeriodId: data.excludePeriodId || null,
           },
-          type: sequelize.QueryTypes.SELECT,
+          type: QueryTypes.SELECT,
         }
       ) as TimetablePeriod[];
 
@@ -827,7 +827,7 @@ export class TimetableService {
               conflictData: conflict.conflictData ? JSON.stringify(conflict.conflictData) : null,
               conflictingPeriods: conflict.conflictingPeriods ? JSON.stringify(conflict.conflictingPeriods) : null,
             },
-            type: sequelize.QueryTypes.SELECT,
+            type: QueryTypes.SELECT,
           }
         ) as TimetableConflict[];
 
@@ -897,7 +897,7 @@ export class TimetableService {
           constraints: options.constraints ? JSON.stringify(options.constraints) : null,
           optimizationSettings: options.optimizationSettings ? JSON.stringify(options.optimizationSettings) : null,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 
@@ -912,7 +912,7 @@ export class TimetableService {
         `SELECT tenant_id FROM sections WHERE id = :firstSectionId LIMIT 1`,
         {
           replacements: { firstSectionId: options.targetSections[0] },
-          type: sequelize.QueryTypes.SELECT,
+          type: QueryTypes.SELECT,
         }
       ) as any[];
 

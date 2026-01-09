@@ -2,6 +2,7 @@ import { Grade, Assessment, AssessmentType } from '../../shared/types';
 import { NotFoundError } from '../../shared/utils/errors';
 import logger from '../../shared/utils/logger';
 import sequelize from '../../config/database';
+import { QueryTypes } from 'sequelize';
 import { publishMessage } from '../../config/rabbitmq';
 
 export class AcademicsService {
@@ -32,7 +33,7 @@ export class AcademicsService {
           dueDate: data.dueDate,
           rubric: data.rubric ? JSON.stringify(data.rubric) : null,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Assessment[];
 
@@ -70,7 +71,7 @@ export class AcademicsService {
           remarks: data.remarks || null,
           gradedBy: data.gradedBy,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Grade[];
 
@@ -151,7 +152,7 @@ export class AcademicsService {
       `SELECT COUNT(*) as total FROM assessments WHERE "classId" = :classId`,
       {
         replacements: { classId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 

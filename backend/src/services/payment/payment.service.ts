@@ -3,6 +3,7 @@ import { Payment, PaymentStatus, PaymentGateway } from '../../shared/types';
 import { NotFoundError } from '../../shared/utils/errors';
 import logger from '../../shared/utils/logger';
 import sequelize from '../../config/database';
+import { QueryTypes } from 'sequelize';
 import { publishMessage } from '../../config/rabbitmq';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
@@ -54,7 +55,7 @@ export class PaymentService {
           invoiceId: data.invoiceId,
           dueDate: data.dueDate,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Payment[];
 
@@ -138,7 +139,7 @@ export class PaymentService {
       `SELECT * FROM payments WHERE "parentId" = :parentId ORDER BY "createdAt" DESC`,
       {
         replacements: { parentId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Payment[];
 
@@ -150,7 +151,7 @@ export class PaymentService {
       `SELECT * FROM payments WHERE "studentId" = :studentId ORDER BY "createdAt" DESC`,
       {
         replacements: { studentId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Payment[];
 
@@ -162,7 +163,7 @@ export class PaymentService {
       `SELECT * FROM payments WHERE id = :id LIMIT 1`,
       {
         replacements: { id },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Payment[];
 
@@ -174,7 +175,7 @@ export class PaymentService {
       `SELECT * FROM payments WHERE "transactionId" = :transactionId LIMIT 1`,
       {
         replacements: { transactionId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as Payment[];
 

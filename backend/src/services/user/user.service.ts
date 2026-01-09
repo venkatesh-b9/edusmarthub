@@ -2,7 +2,7 @@ import { User, UserRole, Permission } from '../../shared/types';
 import { NotFoundError, ConflictError } from '../../shared/utils/errors';
 import logger from '../../shared/utils/logger';
 import sequelize from '../../config/database';
-import { Op } from 'sequelize';
+import { Op, QueryTypes } from 'sequelize';
 
 // User model (simplified - would use Sequelize models in production)
 interface UserModel {
@@ -32,7 +32,7 @@ export class UserService {
       `SELECT * FROM users WHERE id = :id LIMIT 1`,
       {
         replacements: { id },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as UserModel[];
 
@@ -44,7 +44,7 @@ export class UserService {
       `SELECT * FROM users WHERE email = :email LIMIT 1`,
       {
         replacements: { email },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as UserModel[];
 
@@ -74,7 +74,7 @@ export class UserService {
           isEmailVerified: data.isEmailVerified ?? false,
           mfaEnabled: data.mfaEnabled ?? false,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as UserModel[];
 
@@ -108,7 +108,7 @@ export class UserService {
       `UPDATE users SET ${updateFields.join(', ')} WHERE id = :id RETURNING *`,
       {
         replacements,
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as UserModel[];
 
@@ -178,7 +178,7 @@ export class UserService {
       `SELECT * FROM users ${whereClause} ORDER BY "createdAt" DESC`,
       {
         replacements,
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as UserModel[];
 

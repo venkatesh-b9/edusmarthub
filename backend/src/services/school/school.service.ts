@@ -2,6 +2,7 @@ import { School } from '../../shared/types';
 import { NotFoundError, ConflictError } from '../../shared/utils/errors';
 import logger from '../../shared/utils/logger';
 import sequelize from '../../config/database';
+import { QueryTypes } from 'sequelize';
 
 export class SchoolService {
   async findById(id: string): Promise<School | null> {
@@ -9,7 +10,7 @@ export class SchoolService {
       `SELECT * FROM schools WHERE id = :id LIMIT 1`,
       {
         replacements: { id },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as School[];
 
@@ -21,7 +22,7 @@ export class SchoolService {
       `SELECT * FROM schools WHERE subdomain = :subdomain LIMIT 1`,
       {
         replacements: { subdomain },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as School[];
 
@@ -57,7 +58,7 @@ export class SchoolService {
           settings: JSON.stringify(data.settings || {}),
           isActive: data.isActive ?? true,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as School[];
 
@@ -95,7 +96,7 @@ export class SchoolService {
       `UPDATE schools SET ${updateFields.join(', ')} WHERE id = :id RETURNING *`,
       {
         replacements,
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as School[];
 
@@ -106,7 +107,7 @@ export class SchoolService {
     const schools = await sequelize.query(
       `SELECT * FROM schools WHERE "isActive" = true ORDER BY "createdAt" DESC`,
       {
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as School[];
 

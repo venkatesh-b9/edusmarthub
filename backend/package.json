@@ -4,7 +4,7 @@
   "description": "Enterprise School Management System - Backend Microservices",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc --build --skipLibCheck",
     "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js",
     "test": "jest",

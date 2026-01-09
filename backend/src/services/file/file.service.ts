@@ -3,6 +3,7 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { FileUpload } from '../../shared/types';
 import logger from '../../shared/utils/logger';
 import sequelize from '../../config/database';
+import { QueryTypes } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
 const s3Client = new S3Client({
@@ -55,7 +56,7 @@ export class FileService {
           bucket: BUCKET_NAME,
           metadata: metadata ? JSON.stringify(metadata) : null,
         },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as FileUpload[];
 
@@ -68,7 +69,7 @@ export class FileService {
       `SELECT * FROM file_uploads WHERE id = :id LIMIT 1`,
       {
         replacements: { id: fileId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as FileUpload[];
 
@@ -90,7 +91,7 @@ export class FileService {
       `SELECT * FROM file_uploads WHERE id = :id LIMIT 1`,
       {
         replacements: { id: fileId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as FileUpload[];
 
@@ -150,14 +151,14 @@ export class FileService {
 
     const files = await sequelize.query(query, {
       replacements,
-      type: sequelize.QueryTypes.SELECT,
+      type: QueryTypes.SELECT,
     }) as FileUpload[];
 
     const [countResult] = await sequelize.query(
       `SELECT COUNT(*) as total FROM file_uploads WHERE "schoolId" = :schoolId`,
       {
         replacements: { schoolId },
-        type: sequelize.QueryTypes.SELECT,
+        type: QueryTypes.SELECT,
       }
     ) as any[];
 
