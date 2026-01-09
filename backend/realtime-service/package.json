@@ -44,7 +44,7 @@
     "sharedb-mongo": "^1.0.0-beta.5",
     "yjs": "^13.6.8",
     "y-websocket": "^1.5.0",
-    "y-redis": "^10.0.0",
+    "y-redis": "^9.0.0",
     "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
