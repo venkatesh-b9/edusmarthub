@@ -349,7 +349,7 @@ export class TimetableService {
 
     const results = await sequelize.query(query, {
       replacements,
-      type: sequelize.QueryTypes.SELECT,
+      type: QueryTypes.SELECT,
     }) as Room[];
 
     return results;
@@ -479,10 +479,11 @@ export class TimetableService {
 
     query += ` AND is_active = true ORDER BY created_at DESC LIMIT 1`;
 
-    const [result] = await sequelize.query(query, {
+    const results = await sequelize.query(query, {
       replacements,
-      type: sequelize.QueryTypes.SELECT,
+      type: QueryTypes.SELECT,
     }) as Timetable[];
+    const result = results[0];
 
     return result || null;
   }
@@ -860,7 +861,7 @@ export class TimetableService {
 
     const results = await sequelize.query(query, {
       replacements,
-      type: sequelize.QueryTypes.SELECT,
+      type: QueryTypes.SELECT,
     }) as TimetableConflict[];
 
     return results;
