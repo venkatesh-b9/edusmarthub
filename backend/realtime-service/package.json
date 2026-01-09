@@ -4,7 +4,7 @@
   "description": "Real-time service for EduSmartHub using Socket.io",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc --build --skipLibCheck",
     "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js",
     "test": "jest",
@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "socket.io": "^4.7.2",
-    "socket.io-redis": "^6.1.1",
+    "@socket.io/redis-adapter": "^8.2.1",
     "express": "^4.18.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -52,6 +52,8 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.10.6",
     "@types/uuid": "^9.0.7",
+    "@types/compression": "^1.7.5",
+    "@types/morgan": "^1.9.9",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
     "eslint": "^8.56.0",

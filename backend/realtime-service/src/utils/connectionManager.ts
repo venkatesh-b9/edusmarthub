@@ -1,5 +1,5 @@
 import { Server as SocketIOServer, Socket } from 'socket.io';
-import { RedisAdapter } from 'socket.io-redis';
+import { createAdapter } from '@socket.io/redis-adapter';
 import { v4 as uuidv4 } from 'uuid';
 import { SocketConnection, User, Room } from '../types';
 import logger from './logger';
@@ -10,8 +10,8 @@ import http from 'http';
 export class ConnectionManager {
   private connections: Map<string, SocketConnection> = new Map();
   private rooms: Map<string, Room> = new Map();
-  private redisAdapter: RedisAdapter;
   private redisClient: Redis;
+  private redisSubClient: Redis;
 
   constructor(io: SocketIOServer) {
     // Setup Redis adapter for scaling
@@ -22,12 +22,10 @@ export class ConnectionManager {
       db: config.redis.db,
     });
 
-    this.redisAdapter = new RedisAdapter({
-      pubClient: this.redisClient,
-      subClient: this.redisClient.duplicate(),
-    });
+    this.redisSubClient = this.redisClient.duplicate();
 
-    io.adapter(this.redisAdapter);
+    const adapter = createAdapter(this.redisClient, this.redisSubClient);
+    io.adapter(adapter);
 
     // Setup connection tracking
     this.setupConnectionTracking(io);
@@ -309,5 +307,6 @@ export class ConnectionManager {
 
   public async cleanup() {
     await this.redisClient.quit();
+    await this.redisSubClient.quit();
   }
 }
