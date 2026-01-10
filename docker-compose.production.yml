@@ -10,10 +10,10 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=${DATABASE_URL}
-      - REDIS_URL=${REDIS_URL}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:test123@postgres:5432/edusmarthub}
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379}
       - AI_SERVICE_URL=http://ai-services:5000
-      - FRONTEND_URL=${FRONTEND_URL}
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:8080}
     depends_on:
       - postgres
       - redis
@@ -44,9 +44,9 @@ services:
     ports:
       - "8080:80"
     environment:
-      - VITE_API_BASE_URL=${API_BASE_URL}
-      - VITE_WS_URL=${WS_URL}
-      - VITE_AI_SERVICE_URL=${AI_SERVICE_URL}
+      - VITE_API_BASE_URL=${API_BASE_URL:-http://localhost:3000}
+      - VITE_WS_URL=${WS_URL:-ws://localhost:3001}
+      - VITE_AI_SERVICE_URL=${AI_SERVICE_URL:-http://localhost:5000}
     depends_on:
       - app
     networks:
@@ -104,7 +104,7 @@ services:
     environment:
       - POSTGRES_DB=${DB_NAME:-edusmarthub}
       - POSTGRES_USER=${DB_USER:-postgres}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-test123}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
