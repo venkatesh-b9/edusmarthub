@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clean Workspace') {
+            steps {
+                echo '🧹 Cleaning Jenkins workspace'
+                deleteDir()
+            }
+        }
+
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/venkatesh-b9/edusmarthub.git'
+            }
+        }
+
+        stage('Stop Old Containers') {
+            steps {
+                sh '''
+                    docker compose -f docker-compose.production.yml down || true
+                '''
+            }
+        }
+
+        stage('Docker Compose Build & Up') {
+            steps {
+                sh '''
+                    set -e
+                    docker compose -f docker-compose.production.yml build --no-cache
+                    docker compose -f docker-compose.production.yml up -d
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Fresh deployment completed successfully'
+        }
+        failure {
+            echo '❌ Pipeline failed. Deployment did not complete'
+        }
+    }
+}
